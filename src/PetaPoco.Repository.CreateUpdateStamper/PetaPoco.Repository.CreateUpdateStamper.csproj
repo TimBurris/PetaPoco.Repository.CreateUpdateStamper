@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Tim Burris</Authors>
+    <Description>Extends PetaPoco.Repository to allow automatically setting the user who created/updated an entity as well as the date the entity was created/updated</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/TimBurris/PetaPoco.Repository.CreateUpdateStamper</PackageProjectUrl>
+    <PackageTags>Peta Poco Peta-Poco PetaPoco Repository Repository-Pattern microorm Micro-ORM ORM Create CreatedBy CreatedDate CreatedOn UpdatedBy UpdatedOn LastUpdated</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PetaPoco.Repository.Abstractions" Version="0.0.1" />
+  </ItemGroup>
+
+</Project>
