@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\PetaPoco.Repository.CreateUpdateStamper\PetaPoco.Repository.CreateUpdateStamper.csproj" />
+    <ProjectReference Include="..\PetaPoco.Repository.CreateUpdateStamper\PetaPoco.Repository.CreateUpdateStamper.csproj" />
   </ItemGroup>
 
 </Project>
