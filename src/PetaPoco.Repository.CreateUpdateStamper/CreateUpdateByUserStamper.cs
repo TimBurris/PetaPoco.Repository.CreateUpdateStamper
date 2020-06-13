@@ -51,7 +51,7 @@ namespace PetaPoco.Repository.CreateUpdateStamper
             var p = entity.GetType().GetProperty(_options.CreatedByPropertyName);
             if (p != null)
             {
-                p.SetValue(entity, _options.GetUserId.Invoke());
+                p.SetValue(entity, _options.GetUserId());
             }
         }
 
@@ -61,7 +61,7 @@ namespace PetaPoco.Repository.CreateUpdateStamper
             var p = entity.GetType().GetProperty(_options.UpdateByPropertyName);
             if (p != null)
             {
-                p.SetValue(entity, _options.GetUserId.Invoke());
+                p.SetValue(entity, _options.GetUserId());
             }
         }
     }

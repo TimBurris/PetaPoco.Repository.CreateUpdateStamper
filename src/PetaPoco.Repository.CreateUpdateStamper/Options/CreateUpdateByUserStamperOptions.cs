@@ -4,9 +4,11 @@ namespace PetaPoco.Repository.CreateUpdateStamper.Options
 {
     public class CreateUpdateByUserStamperOptions
     {
-        public CreateUpdateByUserStamperOptions(Func<object> getUserIdCallback)
+        private readonly Func<IServiceProvider, object> _userIdProvider;
+
+        public CreateUpdateByUserStamperOptions(Func<IServiceProvider, object> userIdProvider)
         {
-            this.GetUserId = getUserIdCallback;
+            _userIdProvider = userIdProvider;
         }
         public string UpdateByPropertyName { get; set; }
         public string CreatedByPropertyName { get; set; }
@@ -14,7 +16,12 @@ namespace PetaPoco.Repository.CreateUpdateStamper.Options
         public bool StampWithUpdatedBy { get; set; } = true;
         public bool StampWithCreatedBy { get; set; } = true;
 
-        public Func<object> GetUserId { get; }
+        public object GetUserId()
+        {
+            return _userIdProvider.Invoke(ServiceProvider);
+        }
+
+        internal static IServiceProvider ServiceProvider { get; set; }
 
     }
 }
