@@ -4,11 +4,15 @@ namespace PetaPoco.Repository.CreateUpdateStamper.Options
 {
     public class CreateUpdateByUserStamperOptions
     {
-        private readonly Func<IServiceProvider, object> _userIdProvider;
-
-        public CreateUpdateByUserStamperOptions(Func<IServiceProvider, object> userIdProvider)
+        private readonly Func<object> _userIdProvider;
+        private readonly Func<IServiceProvider, object> _serviceUserIdProvider;
+        public CreateUpdateByUserStamperOptions(Func<object> userIdProvider)
         {
             _userIdProvider = userIdProvider;
+        }
+        public CreateUpdateByUserStamperOptions(Func<IServiceProvider, object> serviceUserIdProvider)
+        {
+            _serviceUserIdProvider = serviceUserIdProvider;
         }
         public string UpdateByPropertyName { get; set; }
         public string CreatedByPropertyName { get; set; }
@@ -18,7 +22,10 @@ namespace PetaPoco.Repository.CreateUpdateStamper.Options
 
         public object GetUserId()
         {
-            return _userIdProvider.Invoke(ServiceProvider);
+            if (_userIdProvider != null)
+                return _userIdProvider.Invoke();
+
+            return _serviceUserIdProvider.Invoke(ServiceProvider);
         }
 
         internal static IServiceProvider ServiceProvider { get; set; }
