@@ -6,6 +6,12 @@ namespace PetaPoco.Repository.CreateUpdateStamper.Options
     {
         private readonly Func<object> _userIdProvider;
         private readonly Func<IServiceProvider, object> _serviceUserIdProvider;
+        private readonly ICurrentUserProvider _currentUserProvider;
+
+        public CreateUpdateByUserStamperOptions(ICurrentUserProvider currentUserProvider)
+        {
+            _currentUserProvider = currentUserProvider;
+        }
         public CreateUpdateByUserStamperOptions(Func<object> userIdProvider)
         {
             _userIdProvider = userIdProvider;
@@ -24,6 +30,9 @@ namespace PetaPoco.Repository.CreateUpdateStamper.Options
         {
             if (_userIdProvider != null)
                 return _userIdProvider.Invoke();
+
+            if (_currentUserProvider != null)
+                return _currentUserProvider.GetCurrentUserId();
 
             return _serviceUserIdProvider.Invoke(ServiceProvider);
         }
