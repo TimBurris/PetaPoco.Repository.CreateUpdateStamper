@@ -50,7 +50,7 @@ namespace PetaPoco.Repository.CreateUpdateStamper
             var p = entity.GetType().GetProperty(_options.CreatedOnPropertyName);
             if (p != null)
             {
-                p.SetValue(entity, this.GetDateTime());
+                p.SetValue(entity, this.GetStampValue());
             }
         }
 
@@ -61,10 +61,33 @@ namespace PetaPoco.Repository.CreateUpdateStamper
             var p = entity.GetType().GetProperty(_options.UpdateOnPropertyName);
             if (p != null)
             {
-                p.SetValue(entity, this.GetDateTime());
+                p.SetValue(entity, this.GetStampValue());
             }
         }
 
+        private object GetStampValue()
+        {
+            if (_options.UseDateTimeOffset)
+            {
+                return this.GetDateTimeOffset();
+            }
+            else
+            {
+                return this.GetDateTime();
+            }
+        }
+
+        private DateTimeOffset GetDateTimeOffset()
+        {
+            if (_options.UseUtc)
+            {
+                return DateTimeOffset.UtcNow;
+            }
+            else
+            {
+                return DateTimeOffset.Now;
+            }
+        }
         private DateTime GetDateTime()
         {
             if (_options.UseUtc)

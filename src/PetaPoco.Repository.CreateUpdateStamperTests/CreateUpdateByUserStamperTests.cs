@@ -14,8 +14,7 @@ namespace PetaPoco.Repository.CreateUpdateStamperTests
         public void Init()
         {
             _options = new CreateUpdateStamper.Options.CreateUpdateByUserStamperOptions(() => _currentUserId);
-            _repo.Services
-                .UseCreateUpdateByUserStamper(_options);
+            _repo.Services.AddCreateUpdateByUserStamper(_options);
 
             //assign option defauls, these may get changed depending on individual test needs
             _options.CreatedByPropertyName = nameof(TestEntity.CreatedByUserId);

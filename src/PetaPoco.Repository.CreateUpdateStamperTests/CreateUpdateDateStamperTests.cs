@@ -14,7 +14,7 @@ namespace PetaPoco.Repository.CreateUpdateStamperTests
         public void Init()
         {
             _repo.Services
-                .UseCreateUpdateDateStamper(_options);
+                .AddCreateUpdateDateStamper(_options);
 
             //assign option defauls, these may get changed depending on individual test needs
             _options.CreatedOnPropertyName = nameof(TestEntity.CreatedOnDate);
