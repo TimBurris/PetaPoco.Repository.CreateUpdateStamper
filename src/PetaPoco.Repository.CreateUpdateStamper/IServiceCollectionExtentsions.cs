@@ -1,8 +1,4 @@
-﻿using PetaPoco.Repository.CreateUpdateStamper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Builder;
+﻿using System;
 
 namespace PetaPoco.Repository
 {
@@ -24,9 +20,9 @@ namespace PetaPoco.Repository
             return services;
         }
 
-        public static void UseCreateUpdateDateStamper(this IApplicationBuilder app)
+        public static void UseCreateUpdateDateStamper(this IServiceProvider serviceProvider)
         {
-            CreateUpdateStamper.Options.CreateUpdateByUserStamperOptions.ServiceProvider = app.ApplicationServices;
+            CreateUpdateStamper.Options.CreateUpdateByUserStamperOptions.ServiceProvider = serviceProvider;
         }
     }
 }
